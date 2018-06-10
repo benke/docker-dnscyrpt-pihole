@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+
+  dnscrypt-proxy:
+      restart: always
+      image: dnscrypt-proxy
+      build:
+        context: ./dnscrypt-proxy
+      container_name: dnscrypt-proxy
+      volumes:
+        - ./volumes/dnscrypt-proxy/conf/dnscrypt-proxy.toml:/etc/dnscrypt/dnscrypt-proxy.toml
+
+  pihole:
+      restart: always
+      image: pi-hole
+      build:
+        context: ./pihole
+      container_name: pi-hole
+      environment:
+        - ServerIP=${SERVER_IP}
+        - TZ=UTC
+        - WEBPASSWORD=foobar
+        - DNS1=dnscrypt-proxy
+        - DNS2=dnscrypt-proxy
+        - VIRTUAL_HOST=pi.hole
+      volumes:
+        - ./volumes/pihole/conf/:/etc/pihole/
+        - ./volumes/pihole/dnsmasq.d/:/etc/dnsmasq.d/
+      ports:
+        - "80:80"
+        - "53:53/tcp"
+        - "53:53/udp"
