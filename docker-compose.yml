@@ -20,7 +20,7 @@ services:
       environment:
         - ServerIP=${SERVER_IP}
         - TZ=UTC
-        - WEBPASSWORD=foobar
+        - WEBPASSWORD=${WEBPASSWORD}
         - DNS1=dnscrypt-proxy
         - DNS2=dnscrypt-proxy
         - VIRTUAL_HOST=pi.hole

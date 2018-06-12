@@ -1,4 +1,4 @@
-FROM diginc/pi-hole-multiarch:debian_armhf
+FROM diginc/pi-hole:debian
 
 COPY ./bash_functions.sh /
 
