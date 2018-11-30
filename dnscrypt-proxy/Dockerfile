@@ -1,4 +1,4 @@
-FROM library/debian:jessie
+FROM resin/rpi-raspbian:jessie
 
 # Set correct environment variables
 ENV HOME /root
